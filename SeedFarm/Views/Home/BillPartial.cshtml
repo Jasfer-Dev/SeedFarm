@@ -1,0 +1,239 @@
+﻿@model SeedFarm.Models.BillDescriptionViewModel
+
+<style>
+    #heading {
+        webkit-align-items: center;
+        -ms-align-items: center;
+        align-items: center;
+        background: #fff;
+        cursor: default;
+        height: 3em;
+        left: 0;
+        line-height: 6em;
+        padding: 10px;
+        width: 100%;
+        z-index: 10001;
+        box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.075);
+        text-align: center;
+    }
+</style>
+
+
+<style>
+    fieldset {
+        margin: 20px;
+        padding: 0 10px 10px;
+        border: 1px solid #25a2c3;
+        border-radius: 8px;
+        box-shadow: 0 0 10px #25a2c3;
+        padding-top: 10px;
+    }
+
+    legend {
+        padding: 2px 4px;
+        background: #fff;
+        /* For better legibility against the box-shadow */
+    }
+
+    fieldset > legend {
+        float: left;
+        margin-top: -20px;
+    }
+
+        fieldset > legend + * {
+            clear: both;
+        }
+</style>
+
+
+<div class="wrapper" style="padding:0px;">
+    <header id="heading">
+        <h3>Billing</h3>
+    </header>
+    @using (Html.BeginForm("SaveBill", "Home", FormMethod.Post, new { id = "frmBilling" }))
+    {
+        <div style="margin-top:15px;margin-bottom:15px;" class="inner">
+            <div class="row">
+                <div class="2u 12u$(small)">
+                    <div style="width: auto;">
+                        <label class="label">Customer Name</label>
+                    </div>
+                </div>
+                <div class="3u 12u$(small)">
+                    <div>
+                        <input type="text" style="width: 275px;height:30px;" name="CustomerName" id="CustomerName" value="">
+                    </div>
+                </div>
+                <div class="2u 12u$(small)" style="margin-left: 75px;">
+                    <div style="width: auto;">
+                        <label class="label">Father Name</label>
+                    </div>
+                </div>
+                <div class="3u 12u$(small)">
+                    <div>
+                        <input type="text" style="width: 275px;height:30px;" name="FatherName" id="FatherName" value="">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+
+                <div class="2u 12u$(small)">
+                    <div style="width: auto;">
+                        <label class="label">Address</label>
+                    </div>
+                </div>
+                <div class="3u 12u$(small)">
+                    <div>
+                        <input type="text" style="width: 275px;height:30px;" name="Address" id="Address" value="">
+                    </div>
+                </div>
+                <div class="2u 12u$(small)" style="margin-left: 75px;">
+                    <div style="width: auto;">
+                        <label class="label">City</label>
+                    </div>
+                </div>
+                <div class="3u 12u$(small)">
+                    <div>
+                        <div class="select-wrapper" style="width: 270px;">
+
+                            @*ViewBag.CityList is holding all the cities values*@
+                            @*@Html.DropDownListFor(model => model.City, ViewBag.CityList as SelectList, new { @class = "form-control" })*@
+
+                            <select style="width:275px;height:30px;line-height: 1.5em !important;" name="City" id="City">
+                                <option value="0">- Select -</option>
+                                <option value="Tuticorin">Tuticorin</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <div class="row">
+                <div class="2u 12u$(small)">
+                    <div style="width: auto;">
+                        <label class="label">State</label>
+                    </div>
+                </div>
+                <div class="3u 12u$(small)">
+                    <div>
+                        <div class="select-wrapper" style="width: 270px;">
+                            <select style="width:275px;height:30px;line-height: 1.5em !important" name="State" id="State">
+                                <option value="0">- Select -</option>
+                                <option value="Tamil Nadu">TN</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <fieldset style="background-color:linen;">
+                <legend style="color:#25a2c3;font-weight:500;">
+                    Cash Bill
+                </legend>
+                <div style="margin-top:15px;margin-bottom:15px;" class="inner">
+                    <div class="row">
+                        <div class="2u 12u$(small)">
+                            <div style="width: auto;">
+                                <label class="label">Description</label>
+                            </div>
+                        </div>
+                        <div class="8u$">
+                            @*@Html.TextBoxFor(m => m.Service, new { onkeypress = "return validation(this)", @class = "form-control", @maxlength = 50 })*@
+                            @Html.TextBoxFor(m => m.Description, new { @style = "height:30px;background-color:white;", @type = "text" })
+                            @*<input type="text" style="height:30px;background-color:white;" name="@Model.Description" id="@Model.Description" placeholder="Enter your item description" />*@
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="2u 12u$(small)">
+                            <div style="width: auto;">
+                                <label class="label">Packing</label>
+                            </div>
+                        </div>
+                        <div class="3u 12u$(small)">
+                            <div>
+                                @Html.TextBoxFor(m => m.Packing, new { @style = "width: 200px;height:30px;background-color:white;", @type = "text" })
+                                @*<input type="text" style="width: 200px;height:30px;background-color:white;" name="@Model.Packing" id="@Model.Packing" value="">*@
+                            </div>
+                        </div>
+                        <div class="2u 12u$(small)" style="margin-left: 30px;">
+                            <div style="width: auto;">
+                                <label class="label">Rate Per Packing</label>
+                            </div>
+                        </div>
+                        <div class="3u 12u$(small)">
+                            <div>
+                                @Html.TextBoxFor(m => m.RatePerPacking, new { @style = "width: 200px;height:30px;background-color:white;", @type = "text" })
+                                @*<input type="text" style="width: 200px;height:30px;background-color:white;" name="@Model.RatePerPacking" id="@Model.RatePerPacking" value="">*@
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="2u 12u$(small)">
+                            <div style="width: auto;">
+                                <label class="label">No of Packing</label>
+                            </div>
+                        </div>
+                        <div class="3u 12u$(small)">
+                            <div>
+                                @Html.TextBoxFor(m => m.NoOfPacking, new { @style = "width: 200px;height:30px;background-color:white;", @type = "text" })
+                                @*<input type="text" style="width: 200px;height:30px;background-color:white;" name="@Model.NoOfPacking" id="@Model.NoOfPacking" value="">*@
+                            </div>
+                        </div>
+                        <div class="2u 12u$(small)" style="margin-left: 30px;">
+                            <div style="width: auto;">
+                                <label class="label">Amount</label>
+                            </div>
+                        </div>
+                        <div class="3u 12u$(small)">
+                            <div>
+                                @Html.TextBoxFor(m => m.Amount, new { @style = "width: 200px;height:30px;background-color:white;", @type = "text" })
+                                @*<input type="text" style="width: 200px;height:30px;background-color:white;" name="@Model.Amount" id="@Model.Amount" value="">*@
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="text-align:center;">
+                        <ul class="actions vertical small">
+                            <li><a onclick="Javascript:addRow()" class="button small">Add</a></li>
+                        </ul>
+                    </div>
+
+                </div>
+
+            </fieldset>
+
+            <div id="divBillDesc">
+                <div id="mydata">
+                    @*<b>Current data in the system ...</b>*@
+                    <table id="tblBillingDesc" border="1" cellpadding="2">
+                        <tr>
+                            <td><b>S.No</b></td>
+                            <td><b>Description</b></td>
+                            <td><b>Packing</b></td>
+                            <td><b>Rate Per Packing</b></td>
+                            <td><b>No. of Packing</b></td>
+                            <td><b>Amount</b></td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                    </table>
+                    &nbsp;
+                </div>
+            </div>
+
+
+            <ul class="actions">
+                <li><a onclick="SaveBill()" class="button scrolly">Save/Preview</a></li>
+            </ul>
+        </div>
+
+    }
+</div>
+    <input type="hidden" id="hdnRowIndex" value="0" />
+   
+

@@ -1,0 +1,111 @@
+﻿<!DOCTYPE html>
+
+
+@{
+    /**/
+
+    Layout = null;
+}
+
+<html>
+<head>
+    <title>Kumar Seeds</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="~/assets/css/main.css" />
+
+    <script type="text/javascript">
+        function LoginValidation() {
+            debugger;
+            var isValid = true;
+            if ($("#txtUsername").val() == "" && $("#txtPassword").val() == "") {
+                $("#lblErrorUser").show();
+                $("#lblErrorPassword").show();
+                isValid= false;
+            }
+            else {
+                $("#lblErrorUser").hide();
+                $("#lblErrorPassword").hide();
+            }
+            if ($("#txtPassword").val() == "") {
+                $("#lblErrorPassword").show();
+                isValid= false;
+            } else {
+                $("#lblErrorPassword").hide();
+            }
+
+            if (isValid) {
+                if ($("#txtUsername").val().toLowerCase() == "kumarseed" && $("#txtPassword").val().toLowerCase() == "9443497351") {
+                    var url = "Login/GoBill";
+                    $.ajax({
+                        url: url,
+                        type: "GET",
+                        success: function (result) {
+                            $('#banner').hide();
+                            $('#BillContent').html(result);
+                        },
+                        error: function (xhr) {
+                            alert('error');
+                        }
+                    });
+                }
+                else {
+                    alert("Invalid UserName or Password!")
+                }
+
+            } else {
+                alert("Invalid UserName or Password!")
+            }
+        }
+    </script>
+
+</head>
+<body>
+    <!-- Header -->
+    <header id="header">
+        <nav class="left">
+            <a href="#menu"><span>Menu</span></a>
+        </nav>
+        <a href="index.html" class="logo"><img style="width:150px;margin-top:10px" src="~/Images/nEWlOGO.png" /></a>
+    </header>
+    <!-- Menu -->
+    <nav id="menu" style="width: 16%;">
+        <ul class="links">
+            <li><a href="index.html">Home</a></li>
+            <li><a onclick="return loadpage(this)" data-sectionurl="@Url.Action("Billing","Home")" href="#">Bill</a></li>
+            <li><a href="elements.html">Elements</a></li>
+        </ul>
+        <ul class="actions vertical">
+            <li><a href="#" class="button fit">Login</a></li>
+        </ul>
+    </nav>
+
+    <div id="divBilling">
+        @RenderBody()
+    </div>
+
+    <!-- Footer -->
+    @*<footer id="footer">
+            <div class="inner">
+                <h2>Get In Touch</h2>
+                <ul class="actions">
+                    <li><span class="icon fa-phone"></span> <a href="#">9443497351</a></li>
+                    <li><span class="icon fa-envelope"></span> <a href="#">kumarseeds@gmail.com</a></li>
+                    <li><span class="icon fa-map-marker"></span> 123 Somewhere Road, Tuticorin, TN 6280020</li>
+                </ul>
+            </div>
+            <div class="copyright">
+                &copy; Crafted with love AJ@2019
+            </div>
+        </footer>*@
+
+    <!-- Scripts -->
+    <script src="~/Javascript/Home.js"></script>
+    <script src="~/assets/js/jquery.min.js"></script>
+    <script src="~/assets/js/jquery.scrolly.min.js"></script>
+    <script src="~/assets/js/skel.min.js"></script>
+    <script src="~/assets/js/util.js"></script>
+    <script src="~/assets/js/main.js"></script>
+
+</body>
+</html>

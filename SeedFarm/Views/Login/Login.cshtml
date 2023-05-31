@@ -1,0 +1,100 @@
+﻿@{
+    /**/
+
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+}
+<!DOCTYPE HTML>
+
+<html>
+<head>
+    <title>Kumar Seeds</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+   
+    <script type="text/javascript">
+        function LoginValidation() {
+            debugger;
+            var isValid = true;
+            if ($("#txtUsername").val() == "" && $("#txtPassword").val() == "") {
+                $("#lblErrorUser").show();
+                $("#lblErrorPassword").show();
+                isValid= false;
+            }
+            else {
+                $("#lblErrorUser").hide();
+                $("#lblErrorPassword").hide();
+            }
+            if ($("#txtPassword").val() == "") {
+                $("#lblErrorPassword").show();
+                isValid= false;
+            } else {
+                $("#lblErrorPassword").hide();
+            }
+
+            if (isValid) {
+                if ($("#txtUsername").val().toLowerCase() == "kumarseed" && $("#txtPassword").val().toLowerCase() == "9443497351") {
+                    var url = "Login/GoBill";
+                    $.ajax({
+                        url: url,
+                        type: "GET",
+                        success: function (result) {
+                            //$('#banner').hide();
+                            //$('#BillContent').html(result);
+                        },
+                        error: function (xhr) {
+                            alert('error');
+                        }
+                    });
+                }
+                else {
+                    alert("Invalid UserName or Password!")
+                }
+                
+            } else {
+                alert("Invalid UserName or Password!")
+            }
+        }
+    </script>
+
+</head>
+<body>
+    <!-- Banner -->
+    <section id="banner" style="padding:9em;">
+        <div class="content">
+            @using (Html.BeginForm("GoBill", "Login", FormMethod.Post, new { id = "login" }))
+            {
+            <form action="#" method="post">
+                <div class="row uniform">
+                    <ul class="actions fit">
+                        <li></li>
+                        <li>
+                            <a class="fit">
+                                <input name="name" id="txtUsername" type="text" placeholder="User Name" value="">
+                            </a>
+                            <label class="label" style="display:none;color:red;" id="lblErrorUser">Please Enter User Name!</label>
+                        </li>
+                        <li></li>
+                    </ul>
+
+                    <ul class="actions fit">
+                        <li></li>
+                        <li>
+                            <a class="fit">
+                                <input name="email" id="txtPassword" type="password" placeholder="Password" value="">
+                            </a>
+                            <label class="label" style="display:none;color:red;" id="lblErrorPassword">Please Enter Password!</label>
+                        </li>
+                        <li></li>
+                    </ul>
+                </div>
+                <ul class="actions">
+                    <li><button class="button scrolly" type="submit">Login</button> @*<a class="button scrolly">Login</a>*@</li>
+                </ul>
+            </form>
+                
+            }
+
+        </div>
+    </section>
+</body>
+</html>
